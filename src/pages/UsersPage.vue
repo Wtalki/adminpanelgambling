@@ -15,7 +15,8 @@ const columns = [
   { key: "status", label: "Status" },
   { key: "kyc", label: "KYC" },
   { key: "tier", label: "Tier" },
-  { key: "lastActive", label: "Last Active" }
+  { key: "lastActive", label: "Last Active" },
+  { key: "actions", label: "Actions" }
 ];
 </script>
 
@@ -28,6 +29,7 @@ const columns = [
           <p class="text-sm text-slate-500 dark:text-slate-400">Search, verify, and manage player accounts.</p>
         </div>
         <div class="flex gap-2">
+          <button class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white" type="button">Create user</button>
           <button
             v-if="canBulkManage"
             class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white"
@@ -60,7 +62,21 @@ const columns = [
     </div>
 
     <div class="grid gap-6 xl:grid-cols-[2fr_1fr]">
-      <DataTable title="Users" :columns="columns" :rows="store.users" :page-size="6" />
+      <DataTable title="Users" :columns="columns" :rows="store.users" :page-size="6">
+        <template #actions>
+          <div class="flex flex-wrap gap-2">
+            <button class="rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold dark:border-slate-700" type="button">
+              Edit user
+            </button>
+            <button class="rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold dark:border-slate-700" type="button">
+              Top up balance
+            </button>
+            <button class="rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold dark:border-slate-700" type="button">
+              Withdraw balance
+            </button>
+          </div>
+        </template>
+      </DataTable>
 
       <div class="space-y-6">
         <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">

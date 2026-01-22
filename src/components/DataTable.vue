@@ -47,7 +47,10 @@ const hasPrev = computed(() => page.value > 1);
         <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
           <tr v-for="(row, index) in pagedRows" :key="index" class="text-sm text-slate-700 dark:text-slate-200">
             <td v-for="column in columns" :key="column.key" class="px-3 py-2">
-              {{ row[column.key] }}
+              <slot v-if="column.key === 'actions' && $slots.actions" name="actions" :row="row"></slot>
+              <template v-else>
+                {{ row[column.key] }}
+              </template>
             </td>
           </tr>
         </tbody>
